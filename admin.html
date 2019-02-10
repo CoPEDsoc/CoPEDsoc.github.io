@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<title>CoPED TRAINING</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDJtuGBxQY_6UWh3-kdNFGJi7T6Np_hApk",
+    authDomain: "coped-db.firebaseapp.com",
+    databaseURL: "https://coped-db.firebaseio.com",
+    projectId: "coped-db",
+    storageBucket: "coped-db.appspot.com",
+    messagingSenderId: "683075761857"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body, html {
+    height: 100%;
+    line-height: 1.8;
+}
+.w3-bar .w3-button {
+    padding: 16px;
+}
+div.ex4 {
+    height: 300px;
+    overflow: visible;
+}
+</style>
+
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a class="w3-bar-item w3-button w3-wide"><b>CoPED</b></a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="upload.html" class="w3-bar-item w3-button"><i class="fa fa-pencil"></i>ADD</a>
+        <a href="index.html" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> LOG OUT</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sidebar on small screens when clicking the menu icon -->
+  <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16"><i class="fa fa-sign-out fa-flip-horizontal"></i></a>
+    <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button">ADD</a>
+    <a href="about.html" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
+  </nav>
+
+
+  <!--  "Training" -->
+  <div class="w3-container w3-light-green" style="padding:128px 16px" id="training">
+    <h2 class="w3-center"><b>LIST OF TRAINING</b></h2>
+    <div class="w3-row-padding w3-center" style="margin-top:20px">
+    </div>
+
+
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-storage.js"></script> -->
+
+    <script>
+      var config = {
+        // ...
+      };
+      firebase.initializeApp(config);
+
+    </script>
+
+    <style>
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+    </head>
+    <body>
+
+    <div class="w3-container">
+      <table id="ex-table" border="1" class="w3-table-all w3-card-4" >
+        <tr>
+          <td width="20%"><b>Training</b></td>
+          <td width="10%"><b>Date</b></td>
+          <td width="10%"><b>Time</b></td>
+          <td width="10%"><b>Price</b></td>
+          <td width="10%"><b>Delete</b></td>
+        </tr>
+      </table>
+
+      <script>
+
+        var tbS = document.getElementById('ex-table');
+        var rowIndex = 1;
+        var databaseRef = firebase.database().ref('training').orderByChild('tdate');
+
+          databaseRef.once('value', function(snapshot){
+          snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+
+              var row = tbS.insertRow(rowIndex);
+              var cellTrain = row.insertCell(0);
+              var cellDate = row.insertCell(1);
+              var cellTime = row.insertCell(2);
+              var cellPrice = row.insertCell(3);
+              var cellDelete = row.insertCell(4);
+
+              cellTrain.appendChild(document.createTextNode(childData.tcourse));
+              cellDate.appendChild(document.createTextNode(childData.tdate));
+              cellTime.appendChild(document.createTextNode(childData.ttime));
+              cellPrice.appendChild(document.createTextNode(childData.tprice));
+
+              var pId = childData.tid;
+              var pCourse = childData.tcourse;
+
+              var btn = document.createElement('input');
+              btn.type = "button";
+              btn.className = "btn";
+              btn.value = "DELETE";
+              btn.onclick = (function(pId) {return function() {deleteT(pId,pCourse);}})(pId,pCourse);
+              cellDelete.appendChild(btn);
+
+
+              rowIndex = rowIndex + 1;
+            });
+          });
+
+          function deleteT(x,y) {
+            if (confirm("Confirm Delete Course " + y + "?")) {
+              firebase.database().ref().child('/training/' + x).remove();
+              alert('Course deleted!');
+              reload_page();
+            }
+            else {
+              alert("Delete cancel!");
+            }
+          }
+
+          function reload_page(){
+           window.location.reload();
+          }
+    </script>
+    </div>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </body>
+
+    <p/>
+
+    </div>
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="functionJs.js"></script>
+
+  <!-- Footer -->
+  <footer class="w3-center w3-black w3-padding">
+      <p>&copy; 2018, CoPED<br>By SAHYRO</p>
+  </footer>
+
+  <script>
+
+  // Toggle between showing and hiding the sidebar when clicking the menu icon
+  var mySidebar = document.getElementById("mySidebar");
+
+  function w3_open() {
+      if (mySidebar.style.display === 'block') {
+          mySidebar.style.display = 'none';
+      } else {
+          mySidebar.style.display = 'block';
+      }
+  }
+
+  // Close the sidebar with the close button
+  function w3_close() {
+      mySidebar.style.display = "none";
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+  <!--
+  To use this code on your website, get a free API key from Google.
+  Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+  -->
+
+  </body>
+  </html>

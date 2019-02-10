@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CoPED TRAINING</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDJtuGBxQY_6UWh3-kdNFGJi7T6Np_hApk",
+    authDomain: "coped-db.firebaseapp.com",
+    databaseURL: "https://coped-db.firebaseio.com",
+    projectId: "coped-db",
+    storageBucket: "coped-db.appspot.com",
+    messagingSenderId: "683075761857"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-storage.js"></script> -->
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body, html {
+    height: 100%;
+    line-height: 1.8;
+}
+.w3-bar .w3-button {
+    padding: 16px;
+}
+div.ex4 {
+    height: 300px;
+    overflow: visible;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="index.html" class="w3-bar-item w3-button w3-wide"><b>CoPED</b></a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="about.html" class="w3-bar-item w3-button"><i class="fa fa-info-circle"></i>ABOUT</a>
+      <a href="contact.html" class="w3-bar-item w3-button"><i class="fa fa-phone"></i> CONTACT</a>
+      <a href="register.html" class="w3-bar-item w3-button"><i class="fa fa-pencil-square-o"></i> REGISTER</a>
+      <a href="admin.html" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> ADMIN</a>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16"><i class="fa fa-sign-out fa-flip-horizontal"></i></a>
+  <a href="about.html" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+  <a href="register.html" onclick="w3_close()" class="w3-bar-item w3-button">REGISTER</a>
+  <a href="admin.html" onclick="w3_close()" class="w3-bar-item w3-button">ADMIN</a>
+</nav>
+
+<header>
+<div class="w3-container w3-khaki" id="carousel">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="images/coped01.jpg" alt="Front Desk" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="images/coped02.jpeg" alt="Rapid Miner" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="images/coped03.jpg" alt="Android Studio" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="images/coped04.jpg" alt="Online Database" style="width:100%;">
+      </div>
+    </div>
+
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-xxlarge w3-hide-small"><span class="w3-padding w3-black w3-opacity-min"><b>Start something that matters</b></span></span>
+        <span class="w3-large w3-hide-large w3-hide-medium"><span class="w3-padding w3-black w3-opacity-min"><b>Start something that matters</b></span></span>
+        <p><a href="#training" class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off w3-hide-small">Learn more and start today</a></p>
+        <p><a href="#training" class="w3-button w3-black w3-padding w3-margin-top w3-opacity w3-hover-opacity-off w3-hide-large w3-hide-medium">Learn more and start today</a></p>
+      </div>
+      <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+</header>
+
+<!-- Promo Section - "Training" -->
+<div class="w3-container w3-amber" style="padding:128px 16px" id="training">
+  <h3 class="w3-center"><b>TRAINING THAT AVAILABLE</b></h3>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+
+    <script>
+      var config = {
+        // ...
+      };
+      firebase.initializeApp(config);
+
+    </script>
+
+    <style>
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+    </style>
+    </head>
+    <body>
+
+    <div class="w3-container">
+      <table id="ex-table" border="1" class="w3-table-all w3-card-4" >
+        <tr>
+          <td width="20%"><b>Training</b></td>
+          <td width="10%"><b>Date</b></td>
+          <td width="10%"><b>Time</b></td>
+          <td width="10%"><b>Price</b></td>
+        </tr>
+      </table>
+
+      <script>
+
+        var tbS = document.getElementById('ex-table');
+        var rowIndex = 1;
+        var databaseRef = firebase.database().ref('training').orderByChild('ttime');
+
+          databaseRef.once('value', function(snapshot){
+          snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+
+              var row = tbS.insertRow(rowIndex);
+              var cellTrain = row.insertCell(0);
+              var cellDate = row.insertCell(1);
+              var cellTime = row.insertCell(2);
+              var cellPrice = row.insertCell(3);
+
+              cellTrain.appendChild(document.createTextNode(childData.tcourse));
+              cellDate.appendChild(document.createTextNode(childData.tdate));
+              cellTime.appendChild(document.createTextNode(childData.ttime));
+              cellPrice.appendChild(document.createTextNode(childData.tprice));
+
+              rowIndex = rowIndex + 1;
+            });
+          });
+
+    </script>
+    </div>
+
+  </div>
+</div>
+
+<!-- Work Section -->
+<div class="w3-container w3-khaki" style="padding:128px 16px" id="work">
+  <h3 class="w3-center">OUR PAST TRAINING</h3>
+
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-third">
+      <img src="images/coped03.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Android Studio">
+    </div>
+    <div class="w3-third">
+      <img src="images/coped04.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Android Programming">
+    </div>
+    <div class="w3-third">
+      <img src="images/coped02.jpeg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A drone">
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-section">
+    <div class="w3-third">
+      <img src="images/coped08.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A tablet">
+    </div>
+    <div class="w3-third">
+      <img src="images/coped07.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A camera">
+    </div>
+    <div class="w3-third">
+      <img src="images/coped05.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A typewriter">
+    </div>
+  </div>
+</div>
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright" title="Close Modal Image">×</span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding">
+    <p>&copy; 2018, CoPED<br>By SAHYRO</p>
+</footer>
+
+<!-- Add Google Maps -->
+<script>
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+</body>
+</html>
