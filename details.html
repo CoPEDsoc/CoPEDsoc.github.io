@@ -142,10 +142,9 @@ div.ex4 {
               var mTitle = '"' + pName +'"';
               var mURL = '"' + pURL +'"';
 
-              $("#plink").attr("content",mLink);
-              $("#ctitle").attr("content",mTitle);
-              $("#purl").attr("content",mURL);
-
+              document.getElementsByTagName('meta')["og:url"].content = mLink;
+              document.getElementsByTagName('meta')["og:title"].content = mTitle;
+              document.getElementsByTagName('meta')["og:image"].content = mURL;
 
             }
           });
