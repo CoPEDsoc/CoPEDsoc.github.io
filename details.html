@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<meta property="og:url"                content="" >
+<meta property="og:url"                content="" />
 <meta property="og:type"               content="workshop" />
-<meta property="og:title"              content="" >
+<meta property="og:title"              content="" />
 <meta property="og:description"        content="Join us at CoPED now!" />
 <meta property="og:image"              content="" />
 
@@ -142,10 +142,9 @@ div.ex4 {
               var mTitle = '"' + pName +'"';
               var mURL = '"' + pURL +'"';
 
-              document.getElementsByTagName('meta')[property="og:url"].content = mLink;
-              document.getElementsByTagName('meta')[property="og:title"].content = mTitle;
-              document.getElementsByTagName('meta')[property="og:image"].content = mURL;
-
+              document.querySelector('meta[property="og:url"]').setAttribute("content", mLink);
+              document.querySelector('meta[property="og:title"]').setAttribute("content", mTitle);
+              document.querySelector('meta[property="og:image"]').setAttribute("content", mURL);
             }
           });
         });
