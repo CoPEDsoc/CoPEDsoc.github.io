@@ -114,6 +114,10 @@ div.ex4 {
     <script>
     var ptID = window.location.href.split('?').pop();
     var pURL;
+    var mLink;
+    var mTitle;
+    var mURL;
+
     var databaseRef = firebase.database().ref('posterD');
 
 
@@ -138,15 +142,15 @@ div.ex4 {
               document.getElementById("masaP").innerHTML= pTime;
               document.getElementById("hargaP").innerHTML= pPrice;
 
-              var mLink = '"' + 'https://copedsoc.github.io/details.html?' + ptID +'"';
-              var mTitle = '"' + pName +'"';
-              var mURL = '"' + pURL +'"';
+              mLink = '"' + 'https://copedsoc.github.io/details.html?' + ptID +'"';
+              mTitle = '"' + pName +'"';
+              mURL = '"' + pURL +'"';
 
-              document.querySelector('meta[property="og:url"]').setAttribute("content", mLink);
-              document.querySelector('meta[property="og:title"]').setAttribute("content", mTitle);
-              document.querySelector('meta[property="og:image"]').setAttribute("content", mURL);
             }
           });
+          document.querySelector('meta[property="og:url"]').setAttribute("content", mLink);
+          document.querySelector('meta[property="og:title"]').setAttribute("content", mTitle);
+          document.querySelector('meta[property="og:image"]').setAttribute("content", mURL);
         });
     </script>
 
