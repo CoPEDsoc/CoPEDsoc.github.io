@@ -156,15 +156,17 @@ div.ex4 {
               //$('meta[property=og:image]').attr("content", mURL);
 
               var metaLink = "'"+'<meta property="og:url" content='+ mLink +"'";
+              var metaTitle = "'"+'<meta property="og:title" content='+ mTitle +"'";
+              var metaURL = "'"+'<meta property="og:image" content='+ mURL +"'";
 
               $('meta[property=og:url]').remove();
               $('head').append(metaLink);
 
               $('meta[property=og:url]').remove();
-              $('head').append(metaLink);
+              $('head').append(metaTitle);
 
               $('meta[property=og:url]').remove();
-              $('head').append(metaLink);
+              $('head').append(metaURL);
 
             }
           });
