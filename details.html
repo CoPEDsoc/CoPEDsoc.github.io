@@ -146,11 +146,14 @@ div.ex4 {
               mTitle = '"' + pName +'"';
               mURL = '"' + pURL +'"';
 
-              $("meta[property='og:url']").attr("content", mLink);
+              //$("meta[property='og:url']").attr("content", mLink);
               $("meta[property='og:title']").attr("content", mTitle);
               $("meta[property='og:image']").attr("content", mURL);
 
-              alert(mLink);
+              var link=document.createElement('meta');
+              link.name="og:url";
+              link.content=mLink;
+              document.getElementsByTagName('head')[0].appendChild(link);
 
 
             }
