@@ -146,11 +146,15 @@ div.ex4 {
               mTitle = '"' + pName +'"';
               mURL = '"' + pURL +'"';
 
+              $("meta[property='og:url']").attr("content", mLink);
+              $("meta[property='og:title']").attr("content", mTitle);
+              $("meta[property='og:image']").attr("content", mURL);
+
+              alert(mLink);
+
+
             }
           });
-          document.querySelector('meta[property="og:url"]').setAttribute("content", mLink);
-          document.querySelector('meta[property="og:title"]').setAttribute("content", mTitle);
-          document.querySelector('meta[property="og:image"]').setAttribute("content", mURL);
         });
     </script>
 
