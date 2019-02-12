@@ -147,16 +147,14 @@ div.ex4 {
               mTitle = '"' + pName +'"';
               mURL = '"' + pURL +'"';
 
-              $('meta[property=og:url]').attr("content", mLink);
-              $('meta[property=og:title]').attr("content", mTitle);
-              $('meta[property=og:image]').attr("content", mURL);
+              //$('meta[property=og:url]').attr("content", mLink);
+              //$('meta[property=og:title]').attr("content", mTitle);
+              //$('meta[property=og:image]').attr("content", mURL);
 
-              // Change Meta Description
-              //var $meta = $('meta[property=og:url]').attr('content', 'Changed Meta Content Here');
-              // Change Meta Keywords
-              //$('meta[name=keywords]').attr('content', new_keywords);
-              // Show Updated Meta Content
-              //$('body').text($meta.attr('content'));
+              var metaLink = "'"+'<meta property="og:url" content='+ mLink +"'";
+
+              $('meta[property="og:url"]').remove();
+              $('head').append(metaLink);
 
             }
           });
