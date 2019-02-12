@@ -122,6 +122,9 @@ div.ex4 {
     var mLink;
     var mTitle;
     var mURL;
+    var metaLink;
+    var metaTitle;
+    var metaURL;
 
     var databaseRef = firebase.database().ref('posterD');
 
@@ -159,17 +162,16 @@ div.ex4 {
               var metaTitle = "'"+'<meta property="og:title" content='+ mTitle +"'";
               var metaURL = "'"+'<meta property="og:image" content='+ mURL +"'";
 
-              $('meta[property=og:url]').remove();
-              $('head').append(metaLink);
-
-              $('meta[property=og:title]').remove();
-              $('head').append(metaTitle);
-
-              $('meta[property=og:image]').remove();
-              $('head').append(metaURL);
-
             }
           });
+          $('meta[property=og:url]').remove();
+          $('head').append(metaLink);
+
+          $('meta[property=og:title]').remove();
+          $('head').append(metaTitle);
+
+          $('meta[property=og:image]').remove();
+          $('head').append(metaURL);
         });
     </script>
 
