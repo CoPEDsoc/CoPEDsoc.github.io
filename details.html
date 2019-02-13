@@ -162,13 +162,13 @@ div.ex4 {
               var metaTitle = "'"+'<meta property="og:title" content='+ mTitle +"'";
               var metaURL = "'"+'<meta property="og:image" content='+ mURL +"'";
 
-              $('meta[name='og:url']').remove();
+              $('meta[name="og:url"]').remove();
               $('head').append(metaLink);
 
-              $('meta[name='og:title']').remove();
+              $('meta[name="og:title"]').remove();
               $('head').append(metaTitle);
 
-              $('meta[name='og:image']').remove();
+              $('meta[name="og:image"]').remove();
               $('head').append(metaURL);
 
               //$("meta[name='og:url']").attr("content", mLink);
