@@ -124,8 +124,11 @@ div.ex4 {
           <h5 class="w3-text-black" id="hargaP">Price</h5>
 
           <div class="fb-share-button" id="fbShare"
+            onclick="shareOverrideOGMeta()"
             data-layout="button">
           </div>
+
+          <div id="shareBtn" onclick="shareOverrideOGMeta()" class="btn btn-success clearfix">Share</div>
 
         </div>
 
@@ -173,7 +176,7 @@ div.ex4 {
           });
         });
 
-        document.getElementById('fbShare').onclick = function() {
+        function shareOverrideOGMeta()
         {
         	FB.ui({
         		method: 'share_open_graph',
