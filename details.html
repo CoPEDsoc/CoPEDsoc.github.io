@@ -17,17 +17,28 @@
 <meta property="og:image"               content="https://copedsoc.github.io/images/coped.png" />
 
 
-
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
+<script>
+  window.fbAsyncInit = function() {
+	FB.init({
+	  appId            : '394708667762161',
+	  autoLogAppEvents : true,
+	  xfbml            : true,
+	  version          : 'v2.10'
+	});
+	FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+	 var js, fjs = d.getElementsByTagName(s)[0];
+	 if (d.getElementById(id)) {return;}
+	 js = d.createElement(s); js.id = id;
+	 js.src = "//connect.facebook.net/en_US/sdk.js";
+	 fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 </head>
 
@@ -111,7 +122,7 @@ div.ex4 {
           <h5 class="w3-text-black" id="masaP">Time</h5>
           <h5 class="w3-text-black" id="hargaP">Price</h5>
 
-          <div class="fb-share-button"
+          <div class="fb-share-button" id="fbShare"
             data-href="https://copedsoc.github.io"
             data-layout="button">
           </div>
@@ -160,37 +171,30 @@ div.ex4 {
               mTitle = '"' + pName +'"';
               mURL = '"' + pURL +'"';
 
-              //$('meta[property=og:url]').attr("content", mLink);
-              //$('meta[property=og:title]').attr("content", mTitle);
-              //$('meta[property=og:image]').attr("content", mURL);
-
-              var metaLink = "'"+'<meta property="og:url" content='+ mLink +">'";
-              var metaTitle = "'"+'<meta property="og:title" content='+ mTitle +">'";
-              var metaURL = "'"+'<meta property="og:image" content='+ mURL +">'";
-
-              //$('meta[name="og:url"]').remove();
-              //$('head').append(metaLink);
-
-              //$('meta[name="og:title"]').remove();
-              //$('head').append(metaTitle);
-
-              //$('meta[name="og:image"]').remove();
-              //$('head').append(metaURL);
-
-              $('meta[property="og:url"]').remove();
-              $('meta[property="og:title"]').remove();
-              $('meta[property="og:image"]').remove();
-              $("head").append(metaLink);
-              $("head").append(metaTitle);
-              $("head").append(metaURL);
-
-              //$('meta[property="og:url"]').attr('content', mLink);
-              //$('meta[property="og:title"]').attr('content', mTitle);
-              //$('meta[property="og:image"]').attr('content', mURL);
+              shareOverrideOGMeta(window.location.href, pName, pURL)
 
             }
           });
         });
+
+        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideImage)
+        {
+        	FB.ui({
+        		method: 'share_open_graph',
+        		action_type: 'og.likes',
+        		action_properties: JSON.stringify({
+        			object: {
+        				'og:url': overrideLink,
+        				'og:title': overrideTitle,
+        				'og:image': overrideImage
+        			}
+        		})
+        	},
+        	function (response) {
+        	// Action after response
+        	});
+        }
+
     </script>
 
 
