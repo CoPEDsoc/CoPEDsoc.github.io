@@ -75,20 +75,6 @@ div.ex4 {
     height: 300px;
     overflow: visible;
 }
-
-/* Set a specific color for each brand */
-
-/* Facebook */
-.fa-facebook {
-  background: #3B5998;
-  color: white;
-}
-
-/* Twitter */
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-}
 </style>
 
   <!-- Navbar (sit on top) -->
@@ -137,11 +123,8 @@ div.ex4 {
           <h5 class="w3-text-black" id="masaP">Time</h5>
           <h5 class="w3-text-black" id="hargaP">Price</h5>
 
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="w3-bar-item w3-button"><i class="fa fa-facebook"></i>SHARE</a>
-
           <div class="fb-share-button" id="fbShare"
-            onclick=""
+            onclick="shareOverrideOGMeta()";
             data-layout="button">
           </div>
 
@@ -154,7 +137,7 @@ div.ex4 {
     <script>
     var ptID = window.location.href.split('?').pop();
     var pURL;
-    var mLink;
+    var mLink = window.location.href;
     var mTitle;
     var mURL;
     var metaLink;
@@ -185,41 +168,22 @@ div.ex4 {
               document.getElementById("masaP").innerHTML= pTime;
               document.getElementById("hargaP").innerHTML= pPrice;
 
-              mLink = '"' + 'https://copedsoc.github.io/details.html?' + ptID +'"';
-              mTitle = '"' + pName +'"';
-              mURL = '"' + pURL +'"';
-
-              FB.ui({
-            		method: 'share_open_graph',
-            		action_type: 'og.likes',
-            		action_properties: JSON.stringify({
-            			object: {
-            				'og:url': window.location.href,
-            				'og:title': pName,
-            				'og:image': pURL
-            			}
-            		})
-            	},
-            	function (response) {
-            	// Action after response
-            	});
-
               //shareOverrideOGMeta(window.location.href, pName, pURL);
 
             }
           });
         });
 
-        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideImage)
+        function shareOverrideOGMeta()
         {
         	FB.ui({
         		method: 'share_open_graph',
         		action_type: 'og.likes',
         		action_properties: JSON.stringify({
         			object: {
-        				'og:url': overrideLink,
-        				'og:title': overrideTitle,
-        				'og:image': overrideImage
+        				'og:url': mLink,
+        				'og:title': pName,
+        				'og:image': pURL
         			}
         		})
         	},
