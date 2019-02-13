@@ -162,17 +162,18 @@ div.ex4 {
               var metaTitle = "'"+'<meta property="og:title" content='+ mTitle +"'";
               var metaURL = "'"+'<meta property="og:image" content='+ mURL +"'";
 
-              ///$('meta[property=og:url]').remove();
-              //$('head').append(metaLink);
+              /$('meta[name=og:url]').remove();
+              $('head').append(metaLink);
 
-              //$('meta[property=og:title]').remove();
-              //$('head').append(metaTitle);
+              $('meta[name=og:title]').remove();
+              $('head').append(metaTitle);
 
-              //$('meta[property=og:image]').remove();
-              //$('head').append(metaURL);
-              $("meta[name='og:url']").attr("content", mLink);
-              $("meta[name='og:title']").attr("content", mTitle);
-              $("meta[name='og:image']").attr("content", mURL);
+              $('meta[name=og:image]').remove();
+              $('head').append(metaURL);
+
+              //$("meta[name='og:url']").attr("content", mLink);
+              //$("meta[name='og:title']").attr("content", mTitle);
+              //$("meta[name='og:image']").attr("content", mURL);
 
             }
           });
