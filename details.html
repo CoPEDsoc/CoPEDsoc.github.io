@@ -140,6 +140,8 @@ div.ex4 {
     var ptID = window.location.href.split('?').pop();
     var pURL;
     var mLink = window.location.href;
+    var mType = "workshop";
+    var mDes = "Join us at CoPED now!";
     var mTitle;
     var mURL;
     var metaLink;
@@ -184,9 +186,9 @@ div.ex4 {
         		action_properties: JSON.stringify({
         			object: {
         				'og:url': mLink,
-                'og:type': "workshop",
+                'og:type': mType,
         				'og:title': pName,
-                'og:description': "Join us at CoPED now!",
+                'og:description': mDes,
         				'og:image': pURL
         			}
         		})
