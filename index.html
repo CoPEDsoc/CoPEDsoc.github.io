@@ -152,44 +152,60 @@ div.ex4 {
     </head>
     <body>
 
-    <div class="w3-container">
-      <table id="ex-table" border="1" class="w3-table-all w3-card-4" >
-        <tr>
-          <td width="20%"><b>Training</b></td>
-          <td width="10%"><b>Date</b></td>
-          <td width="10%"><b>Time</b></td>
-          <td width="10%"><b>Price</b></td>
-        </tr>
-      </table>
+      <!-- Test Poster Table -->
+          <div class="w3-container">
+            <br>
+            <table id="pt-table" border="1" class="w3-table-all w3-card-4" >
+              <tr>
+                <td ><b>Poster</b></td>
+                <td ><b>More</b></td>
+              </tr>
+            </table>
 
-      <script>
+            <script>
 
-        var tbS = document.getElementById('ex-table');
-        var rowIndex = 1;
-        var databaseRef = firebase.database().ref('training').orderByChild('ttime');
+              var tbp = document.getElementById('pt-table');
+              var rowIndex = 1;
+              var databaseRef = firebase.database().ref('posterD');
 
-          databaseRef.once('value', function(snapshot){
-          snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
+                databaseRef.once('value', function(snapshot){
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
 
-              var row = tbS.insertRow(rowIndex);
-              var cellTrain = row.insertCell(0);
-              var cellDate = row.insertCell(1);
-              var cellTime = row.insertCell(2);
-              var cellPrice = row.insertCell(3);
+                    var row = tbp.insertRow(rowIndex);
+                    var cellPoster = row.insertCell(0);
+                    var cellRegister = row.insertCell(1);
 
-              cellTrain.appendChild(document.createTextNode(childData.tcourse));
-              cellDate.appendChild(document.createTextNode(childData.tdate));
-              cellTime.appendChild(document.createTextNode(childData.ttime));
-              cellPrice.appendChild(document.createTextNode(childData.tprice));
+                    var img2 = document.createElement("img");
+                    img2.src = childData.url;
+                    img2.setAttribute("width", "500");
+                    img2.setAttribute("position", "center");
+                    cellPoster.appendChild(img2);
 
-              rowIndex = rowIndex + 1;
-            });
-          });
+                    var tID = childData.id;
+                    var btn = document.createElement('input');
+                    btn.type = "button";
+                    btn.className = "btn";
+                    btn.value = "VIEW";
+                    btn.onclick = (function(tID) {return function() {pView(tID);}})(tID);
+                    cellRegister.appendChild(btn);
 
-    </script>
-    </div>
+                    rowIndex = rowIndex + 1;
+                  });
+                });
+
+                function pView(x) {
+                    var someValue = x;
+                    window.location = 'details.html?'+someValue;
+                }
+
+                function reload_page(){
+                 window.location.reload();
+                }
+          </script>
+
+          </div>
 
   </div>
 </div>
