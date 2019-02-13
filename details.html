@@ -26,7 +26,7 @@
 	  appId            : '394708667762161',
 	  autoLogAppEvents : true,
 	  xfbml            : true,
-	  version          : 'v2.10'
+	  version          : 'v3.0'
 	});
 	FB.AppEvents.logPageView();
   };
@@ -171,7 +171,22 @@ div.ex4 {
               mTitle = '"' + pName +'"';
               mURL = '"' + pURL +'"';
 
-              shareOverrideOGMeta(window.location.href, pName, pURL);
+              FB.ui({
+            		method: 'share_open_graph',
+            		action_type: 'og.likes',
+            		action_properties: JSON.stringify({
+            			object: {
+            				'og:url': window.location.href,
+            				'og:title': pName,
+            				'og:image': pURL
+            			}
+            		})
+            	},
+            	function (response) {
+            	// Action after response
+            	});
+
+              //shareOverrideOGMeta(window.location.href, pName, pURL);
 
             }
           });
