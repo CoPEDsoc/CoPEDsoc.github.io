@@ -171,9 +171,16 @@ div.ex4 {
               //$('meta[name="og:image"]').remove();
               //$('head').append(metaURL);
 
-              $('meta[property="og:url"]').attr('content', mLink);
-              $('meta[property="og:title"]').attr('content', mTitle);
-              $('meta[property="og:image"]').attr('content', mURL);
+              $('meta[property="og:url"]').remove();
+              $('meta[property="og:title"]').remove();
+              $('meta[property="og:image"]').remove();
+              $("head").append(metaLink);
+              $("head").append(metaTitle);
+              $("head").append(metaURL);
+
+              //$('meta[property="og:url"]').attr('content', mLink);
+              //$('meta[property="og:title"]').attr('content', mTitle);
+              //$('meta[property="og:image"]').attr('content', mURL);
 
             }
           });
