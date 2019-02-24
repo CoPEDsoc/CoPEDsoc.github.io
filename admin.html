@@ -39,7 +39,7 @@ div.ex4 {
 
   <!-- Navbar (sit on top) -->
   <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <div class="w3-bar w3-black w3-card" id="myNavbar">
       <a class="w3-bar-item w3-button w3-wide"><b>CoPED</b></a>
       <!-- Right-sided navbar links -->
       <div class="w3-right w3-hide-small">
@@ -57,13 +57,13 @@ div.ex4 {
   <!-- Sidebar on small screens when clicking the menu icon -->
   <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16"><i class="fa fa-sign-out fa-flip-horizontal"></i></a>
-    <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="w3-bar-item w3-button">ADD</a>
-    <a href="about.html" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
+    <a href="upload.html" onclick="w3_close()" class="w3-bar-item w3-button">ADD</a>
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
   </nav>
 
 
   <!--  "Training" -->
-  <div class="w3-container w3-light-green" style="padding:128px 16px" id="training">
+  <div class="w3-container w3-blue-gray" style="padding:80px 16px" id="training">
     <h2 class="w3-center"><b>LIST OF TRAINING</b></h2>
     <div class="w3-row-padding w3-center" style="margin-top:20px">
     </div>
@@ -87,76 +87,64 @@ div.ex4 {
         padding: 8px;
     }
 
-    tr:nth-child(even){background-color: #f2f2f2}
     </style>
     </head>
     <body>
 
-    <div class="w3-container">
-      <table id="ex-table" border="1" class="w3-table-all w3-card-4" >
-        <tr>
-          <td width="20%"><b>Training</b></td>
-          <td width="10%"><b>Date</b></td>
-          <td width="10%"><b>Time</b></td>
-          <td width="10%"><b>Price</b></td>
-          <td width="10%"><b>Delete</b></td>
-        </tr>
-      </table>
+      <!-- Test Poster Table -->
+          <div class="w3-container">
+            <br>
+            <table id="pt-table">
+              <tr>
+                <td width="50%"></td>
+                <td width="20%"></td>
+              </tr>
+            </table>
 
-      <script>
+            <script>
 
-        var tbS = document.getElementById('ex-table');
-        var rowIndex = 1;
-        var databaseRef = firebase.database().ref('training').orderByChild('tdate');
+              var tbp = document.getElementById('pt-table');
+              var rowIndex = 1;
+              var databaseRef = firebase.database().ref('posterD');
 
-          databaseRef.once('value', function(snapshot){
-          snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
+                databaseRef.once('value', function(snapshot){
+                snapshot.forEach(function(childSnapshot) {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
 
-              var row = tbS.insertRow(rowIndex);
-              var cellTrain = row.insertCell(0);
-              var cellDate = row.insertCell(1);
-              var cellTime = row.insertCell(2);
-              var cellPrice = row.insertCell(3);
-              var cellDelete = row.insertCell(4);
+                    var row = tbp.insertRow(rowIndex);
+                    var cellPoster = row.insertCell(0);
+                    var cellRegister = row.insertCell(1);
 
-              cellTrain.appendChild(document.createTextNode(childData.tcourse));
-              cellDate.appendChild(document.createTextNode(childData.tdate));
-              cellTime.appendChild(document.createTextNode(childData.ttime));
-              cellPrice.appendChild(document.createTextNode(childData.tprice));
+                    var img2 = document.createElement("img");
+                    img2.src = childData.url;
+                    img2.setAttribute("width", "100%");
+                    img2.setAttribute("position", "center");
+                    cellPoster.appendChild(img2);
 
-              var pId = childData.tid;
-              var pCourse = childData.tcourse;
+                    var tID = childData.id;
+                    var btn = document.createElement('input');
+                    btn.type = "button";
+                    btn.className = "btn";
+                    btn.value = "VIEW";
+                    btn.onclick = (function(tID) {return function() {pView(tID);}})(tID);
+                    cellRegister.appendChild(btn);
 
-              var btn = document.createElement('input');
-              btn.type = "button";
-              btn.className = "btn";
-              btn.value = "DELETE";
-              btn.onclick = (function(pId) {return function() {deleteT(pId,pCourse);}})(pId,pCourse);
-              cellDelete.appendChild(btn);
+                    rowIndex = rowIndex + 1;
+                  });
+                });
 
+                function pView(x) {
+                    var someValue = x;
+                    window.location = 'details.html?'+someValue;
+                }
 
-              rowIndex = rowIndex + 1;
-            });
-          });
+                function reload_page(){
+                 window.location.reload();
+                }
+          </script>
 
-          function deleteT(x,y) {
-            if (confirm("Confirm Delete Course " + y + "?")) {
-              firebase.database().ref().child('/training/' + x).remove();
-              alert('Course deleted!');
-              reload_page();
-            }
-            else {
-              alert("Delete cancel!");
-            }
-          }
-
-          function reload_page(){
-           window.location.reload();
-          }
-    </script>
-    </div>
+          </div>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
