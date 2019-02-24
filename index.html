@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-blue.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -47,7 +48,7 @@ div.ex4 {
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
+  <div class="w3-bar w3-black w3-card" id="myNavbar">
     <a href="index.html" class="w3-bar-item w3-button w3-wide"><b>CoPED</b></a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
@@ -74,9 +75,9 @@ div.ex4 {
 </nav>
 
 <header>
-<div class="w3-container w3-khaki" style="padding:80px 16px">
+<div class="w3-container w3-blue-gray" style="padding:50px 20px">
   <img src="images/coped09.png" alt="Front Desk" style="width:100%">
-  <div class="w3-display-left w3-text-white" style="padding:48px">
+  <div class="w3-display-left w3-text-white" style="padding:10px">
       <span class="w3-xxlarge w3-hide-small"><span class="w3-padding w3-black w3-opacity-min"><b>Start something that matters</b></span></span>
       <span class="w3-large w3-hide-large w3-hide-medium"><span class="w3-padding w3-black w3-opacity-min"><b>Start something that matters</b></span></span>
       <p><a href="#training" class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off w3-hide-small">Learn more and start today</a></p>
@@ -87,7 +88,7 @@ div.ex4 {
 </header>
 
 <!-- Promo Section - "Training" -->
-<div class="w3-container w3-amber" style="padding:10px 10px" id="training">
+<div class="w3-container w3-light-gray" style="padding:10px 10px" id="training">
   <h3 class="w3-center"><b>TRAINING THAT AVAILABLE</b></h3>
   <div class="w3-row-padding w3-center">
 
@@ -145,6 +146,7 @@ div.ex4 {
                     btn.type = "button";
                     btn.className = "btn";
                     btn.value = "VIEW";
+                    btn.color = "black";
                     btn.onclick = (function(tID) {return function() {pView(tID);}})(tID);
                     cellRegister.appendChild(btn);
 
@@ -168,7 +170,7 @@ div.ex4 {
 </div>
 
 <!-- Work Section -->
-<div class="w3-container w3-khaki" style="padding:128px 16px" id="work">
+<div class="w3-container w3-gray" style="padding:50px 16px" id="work">
   <h3 class="w3-center">OUR PAST TRAINING</h3>
 
   <div class="w3-row-padding" style="margin-top:64px">
