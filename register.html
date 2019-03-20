@@ -46,7 +46,7 @@ div.ex4 {
       <a href="about.html" class="w3-bar-item w3-button"><i class="fa fa-info-circle"></i>ABOUT</a>
       <a href="contact.html" class="w3-bar-item w3-button"><i class="fa fa-phone"></i> CONTACT</a>
       <a href="register.html" class="w3-bar-item w3-button"><i class="fa fa-pencil-square-o"></i> REGISTER</a>
-      <a href="admin.html" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> ADMIN</a>
+      <a href="login.html" target="_blank" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> ADMIN</a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -62,11 +62,11 @@ div.ex4 {
   <a href="about.html" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
   <a href="contact.html" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
   <a href="register.html" onclick="w3_close()" class="w3-bar-item w3-button">REGISTER</a>
-  <a href="admin.html" onclick="w3_close()" class="w3-bar-item w3-button">ADMIN</a>
+  <a href="login.html" target="_blank" onclick="w3_close()" class="w3-bar-item w3-button">ADMIN</a>
 </nav>
 
 <!-- Promo Section - "Training" -->
-<div class="w3-container w3-blue-gray" style="padding:80px 16px" id="training">
+<div class="w3-container w3-light-gray" style="padding:80px 16px" id="training">
   <h3 class="w3-center"><b>TRAINING THAT AVAILABLE</b></h3>
   <div class="w3-row-padding w3-center" style="margin-top:64px">
 
@@ -88,6 +88,7 @@ div.ex4 {
   th, td {
       text-align: left;
       padding: 8px;
+      color: black;
   }
 
   tr:nth-child(even){background-color: #f2f2f2}
@@ -95,79 +96,97 @@ div.ex4 {
   </head>
   <body>
 
-  <div class="w3-container">
-    <table id="ex-table" border="1" class="w3-table-all w3-card-4" >
-      <tr>
-        <td width="20%"><b>Training</b></td>
-        <td width="10%"><b>Date</b></td>
-        <td width="10%"><b>Time</b></td>
-        <td width="10%"><b>Price</b></td>
-        <td width="10%"><b>Register</b></td>
-      </tr>
-    </table>
+    <!-- Poster Table -->
+        <div class="w3-container">
+          <br>
+          <table id="pt-table" border="1" class="w3-table-all w3-card-4" >
+            <tr>
+              <td width="20%"><b>Poster</b></td>
+              <td width="20%"><b>Program Name</b></td>
+              <td width="20%"><b>Description</b></td>
+              <td width="20%"><b>Date</b></td>
+              <td width="20%"><b>Register</b></td>
+            </tr>
+          </table>
 
-    <script>
+          <script>
 
-      var tbS = document.getElementById('ex-table');
-      var rowIndex = 1;
-      var databaseRef = firebase.database().ref('training').orderByChild('ttime');
+            var tbp = document.getElementById('pt-table');
+            var rowIndex = 1;
+            var databaseRef = firebase.database().ref('posterD');
 
-        databaseRef.once('value', function(snapshot){
-        snapshot.forEach(function(childSnapshot) {
-            var childKey = childSnapshot.key;
-            var childData = childSnapshot.val();
+              databaseRef.once('value', function(snapshot){
+              snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
 
-            var row = tbS.insertRow(rowIndex);
-            var cellTrain = row.insertCell(0);
-            var cellDate = row.insertCell(1);
-            var cellTime = row.insertCell(2);
-            var cellPrice = row.insertCell(3);
-            var cellRegister = row.insertCell(4);
-
-            cellTrain.appendChild(document.createTextNode(childData.tcourse));
-            cellDate.appendChild(document.createTextNode(childData.tdate));
-            cellTime.appendChild(document.createTextNode(childData.ttime));
-            cellPrice.appendChild(document.createTextNode(childData.tprice));
-
-            var dId = childData.tid;
-            var dCourse = childData.tcourse;
-
-            var btn = document.createElement('input');
-            btn.type = "button";
-            btn.className = "btn";
-            btn.value = "REGISTER";
-            btn.onclick = (function(dId) {return function() {registerC(dId, dCourse);}})(dId, dCourse);
-            cellRegister.appendChild(btn);
+                  var row = tbp.insertRow(rowIndex);
+                  var cellPoster = row.insertCell(0);
+                  var cellName = row.insertCell(1);
+                  var cellDes = row.insertCell(2);
+                  var cellDate = row.insertCell(3);
+                  var cellRegister = row.insertCell(4);
 
 
-            rowIndex = rowIndex + 1;
-          });
-        });
+                  var img2 = document.createElement("img");
+                  img2.src = childData.url;
+                  img2.setAttribute("max-width", "100%");
+                  img2.setAttribute("height", "200px");
+                  img2.setAttribute("align", "center");
+                  cellPoster.appendChild(img2);
 
-        function registerC(dId, dCourse) {
+                  cellName.appendChild(document.createTextNode(childData.course));
+                  cellDes.appendChild(document.createTextNode(childData.description));
+                  cellDate.appendChild(document.createTextNode(childData.date));
 
-          document.getElementById('id01').style.display='block';
+                  var dId = childData.id;
+                  var dCourse = childData.course;
 
-          document.getElementById('pId').value = dId;
-          document.getElementById('pCourse').value = dCourse;
+                  var btn = document.createElement('input');
+                  btn.type = "button";
+                  btn.className = "btn";
+                  btn.value = "REGISTER";
+                  btn.onclick = (function(dId) {return function() {registerC(dId, dCourse);}})(dId, dCourse);
+                  cellRegister.appendChild(btn);
 
-        }
+                  rowIndex = rowIndex + 1;
+                });
+              });
 
-        function reload_page(){
-         window.location.reload();
-        }
-  </script>
-  </div>
+              function registerC(dId, dCourse) {
+
+                document.getElementById('id01').style.display='block';
+
+                document.getElementById('pId').value = dId;
+                document.getElementById('pCourse').value = dCourse;
+
+              }
+
+              function reload_page(){
+               window.location.reload();
+              }
+        </script>
+
+        </div>
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
   body {font-family: Arial, Helvetica, sans-serif;}
 
   /* Full-width input fields */
-  input[type=text], input[type=password] {
+  input[type=text]{
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+  }
+
+  input[type=number]{
+      padding: 10px 20px;
+      margin: 10px 0;
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
@@ -284,17 +303,17 @@ div.ex4 {
        <input type="text" id="pId" name ="pid" disabled>
 
        <label for="pcourse"><b>Course</b></label>
-       <input type="text" id="pCourse" name ="pcourse" required>
+       <input type="text" id="pCourse" name ="pcourse" disabled>
 
        <label for="pname"><b>Name</b></label>
        <input type="text" id="pName" placeholder="Enter your name" name="pname" required>
 
        <label for="pmatric"><b>Matric Number</b></label>
        <input type="number" id="pMatric" placeholder="Enter your matric number" name="pmatric" required>
-       <br><br>
+       <br>
 
        <label for="ptel"><b>Tel. Number</b></label>
-       <input type="text" id="pTel" placeholder="Enter your contact number" name="ptel" required>
+       <input type="number" id="pTel" placeholder="Enter your contact number" name="ptel" required>
 
         <button type="submit" onclick="save_info();">Submit</button>
       </div>
@@ -329,7 +348,7 @@ div.ex4 {
    }
 
   function reload_page(){
-   window.location.reload();
+   window.location = 'register.html';
   }
 
   // Get the modal

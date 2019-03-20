@@ -95,12 +95,10 @@ function uploadFile2() {
 	  // Handle unsuccessful uploads
 	}, function() {
 		// Handle successful uploads on complete
-    alert('Image Upload!');
+    //alert('Image Upload!');
 		// Upload completed successfully, now we can get the download URL
 	  uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
 
-			alert(downloadURL);
-			alert('saveInfo');
 			saveInfo(postKey, downloadURL);
 	  });
 
@@ -135,7 +133,7 @@ function saveInfo(postKey, downloadURL){
 	  var databaseRef = firebase.database().ref().update(updates);
 
     alert('Data added!');
-	  reload_page();
+	  balikC();
 }
 
 function balikC() {

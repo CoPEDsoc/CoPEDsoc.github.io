@@ -6,21 +6,32 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <body>
 
-<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDJtuGBxQY_6UWh3-kdNFGJi7T6Np_hApk",
-    authDomain: "coped-db.firebaseapp.com",
-    databaseURL: "https://coped-db.firebaseio.com",
-    projectId: "coped-db",
-    storageBucket: "coped-db.appspot.com",
-    messagingSenderId: "683075761857"
-  };
-  firebase.initializeApp(config);
-</script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDJtuGBxQY_6UWh3-kdNFGJi7T6Np_hApk",
+      authDomain: "coped-db.firebaseapp.com",
+      databaseURL: "https://coped-db.firebaseio.com",
+      projectId: "coped-db",
+      storageBucket: "coped-db.appspot.com",
+      messagingSenderId: "683075761857"
+    };
+    firebase.initializeApp(config);
+
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = firebase.storage();
+
+    // Create a storage reference from our storage service
+    var storageRef = storage.ref();
+
+    var database = firebase.database();
+    var databaseRef = database.ref();
+
+  </script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
@@ -44,7 +55,7 @@ div.ex4 {
       <!-- Right-sided navbar links -->
       <div class="w3-right w3-hide-small">
         <a href="upload.html" class="w3-bar-item w3-button"><i class="fa fa-pencil"></i>ADD</a>
-        <a href="index.html" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> LOG OUT</a>
+        <a onclick="logout();" class="w3-bar-item w3-button"><i class="fa fa-user-circle-o"></i> LOG OUT</a>
       </div>
       <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -58,13 +69,19 @@ div.ex4 {
   <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16"><i class="fa fa-sign-out fa-flip-horizontal"></i></a>
     <a href="upload.html" onclick="w3_close()" class="w3-bar-item w3-button">ADD</a>
-    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button">LOG OUT</a>
+    <a onclick="logout();" class="w3-bar-item w3-button">LOG OUT</a>
   </nav>
 
+  <script>
+    function logout(){
+      firebase.auth().signOut();
+      window.location.href = 'index.html';
+    }
+  </script>
 
-  <!--  "Training" -->
-  <div class="w3-container w3-blue-gray" style="padding:80px 16px" id="training">
-    <h2 class="w3-center"><b>LIST OF TRAINING</b></h2>
+
+  <div class="w3-container w3-theme-l2" style="padding:80px 16px" id="training">
+    <h2 class="w3-center"><b>ADMINISTRATOR</b></h2>
     <div class="w3-row-padding w3-center" style="margin-top:20px">
     </div>
 
@@ -77,6 +94,11 @@ div.ex4 {
         // ...
       };
       firebase.initializeApp(config);
+
+      function uploadP(){
+        document.getElementById('id01').style.display='block';
+
+      }
 
     </script>
 
@@ -91,13 +113,14 @@ div.ex4 {
     </head>
     <body>
 
-      <!-- Test Poster Table -->
+      <!-- Poster Table -->
           <div class="w3-container">
             <br>
-            <table id="pt-table">
+            <table id="pt-table" border="1" class="w3-table-all w3-card-4" >
               <tr>
-                <td width="50%"></td>
-                <td width="20%"></td>
+                <td width="30%"><b>Poster</b></td>
+                <td width="30%"><b>Participant</b></td>
+                <td width="30%"><b>Delete</b></td>
               </tr>
             </table>
 
@@ -114,12 +137,14 @@ div.ex4 {
 
                     var row = tbp.insertRow(rowIndex);
                     var cellPoster = row.insertCell(0);
-                    var cellRegister = row.insertCell(1);
+                    var cellParticipant = row.insertCell(1);
+                    var cellDelete = row.insertCell(2);
 
                     var img2 = document.createElement("img");
                     img2.src = childData.url;
-                    img2.setAttribute("width", "100%");
-                    img2.setAttribute("position", "center");
+                    img2.setAttribute("max-width", "100%");
+                    img2.setAttribute("height", "200px");
+                    img2.setAttribute("align", "center");
                     cellPoster.appendChild(img2);
 
                     var tID = childData.id;
@@ -128,15 +153,29 @@ div.ex4 {
                     btn.className = "btn";
                     btn.value = "VIEW";
                     btn.onclick = (function(tID) {return function() {pView(tID);}})(tID);
-                    cellRegister.appendChild(btn);
+                    cellParticipant.appendChild(btn);
+
+                    var btn2 = document.createElement('input');
+                    btn2.type = "button";
+                    btn2.className = "btn";
+                    btn2.value = "DELETE";
+                    btn2.onclick = (function(tID) {return function() {pDelete(tID);}})(tID);
+                    cellDelete.appendChild(btn2);
 
                     rowIndex = rowIndex + 1;
                   });
                 });
 
                 function pView(x) {
-                    var someValue = x;
-                    window.location = 'details.html?'+someValue;
+                    var url = 'detailsAdmin.html?'+ x;
+                    window.open(url, '_blank').focus();
+                }
+
+                function pDelete(x) {
+                    if(confirm('Are you sure?')){
+                        firebase.database().ref("posterD").child(x).remove();
+                        window.location.reload();
+                    }
                 }
 
                 function reload_page(){
@@ -153,6 +192,12 @@ div.ex4 {
     <p/>
 
     </div>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
 
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <!-- Bootstrap core JavaScript
@@ -187,7 +232,7 @@ div.ex4 {
       mySidebar.style.display = "none";
   }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+
   <!--
   To use this code on your website, get a free API key from Google.
   Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
