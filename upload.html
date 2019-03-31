@@ -51,8 +51,8 @@
 
 .form-inline input {
   vertical-align: middle;
-  margin: 5px 10px 5px 0;
-  padding: 10px;
+  margin: 0px 5px 10px 0;
+  padding: 6px;
   background-color: #fff;
   border: 1px solid #ddd;
 }
@@ -87,7 +87,7 @@
     <fieldset class="w3-light-grey">
     <div class="w3-row-padding" id="uploadDiv">
 
-      <h2>ADD TRAINING</h2>
+      <h3 style="text-align: center;">ADD TRAINING</h3>
 
       <label class="upload-group" for="pcourse"><b>Course</b></label><br>
       <input type="text" class="upload-group" id="pCourse" placeholder="Enter course" name ="pcourse" required><br>
@@ -95,14 +95,20 @@
       <label class="upload-group" for="pdate"><b>Date</b></label><br>
       <input type="date" class="upload-group" id="pDate" name ="pdate" required><br>
 
+      <label class="upload-group" for="pdur"><b>Duration</b></label><br>
+      <input type="text" class="upload-group" id="pDur" placeholder="Enter duration (day : 1 day)" name ="pdur" required><br>
+
       <label class="upload-group" for="ptime"><b>Time</b></label><br>
       <input type="text" class="upload-group" id="pTime" name="pTIme" placeholder="Enter time of course" required><br>
 
-      <label class="upload-group" for="pPrice"><b>Price</b></label><br>
+      <label class="upload-group" for="pprice"><b>Price</b></label><br>
       <input type="text" class="upload-group" id="pPrice" placeholder="Enter the price of course" name="pprice" required><br>
 
+      <label class="upload-group" for="pdet"><b>Program Details</b></label><br>
+      <textarea type="text" class="upload-group" id="pDet" placeholder="Enter the course details" name="pdet" rows="3" cols="35" maxlength="100" required></textarea><br>
+
       <label class="upload-group"><b>Upload File</b></label><br>
-      <input type="file" class="upload-group" id="file"><br>
+      <input type="file" class="upload-group" id="file" required><br>
 
       <div class="w3-row-padding w3-right" id="btnpadding" style="margin-top:10px">
         <button type="button" class="w3-button w3-red" onclick="balikC()">CANCEL</button>

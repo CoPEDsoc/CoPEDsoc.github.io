@@ -114,8 +114,10 @@ function saveInfo(postKey, downloadURL){
 
 		var sCourse = document.getElementById('pCourse').value;
 		var sDate = document.getElementById('pDate').value;
+		var sDuration = document.getElementById('pDur').value;
 		var sTime = document.getElementById('pTime').value;
 		var sPrice = document.getElementById('pPrice').value;
+		var sDetails = document.getElementById('pDet').value;
 
 
 		var postData = {
@@ -123,8 +125,10 @@ function saveInfo(postKey, downloadURL){
 	  	id: postKey,
 	  	course: sCourse,
 			date: sDate,
+			duration: sDuration,
 			time: sTime,
-			price: sPrice
+			price: sPrice,
+			details: sDetails
 	  };
 
 
