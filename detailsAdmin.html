@@ -21,25 +21,32 @@
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 
-<script>
-  window.fbAsyncInit = function() {
-	FB.init({
-	  appId            : '394708667762161',
-	  autoLogAppEvents : true,
-	  xfbml            : true,
-	  version          : 'v3.20'
-	});
-	FB.AppEvents.logPageView();
-  };
 
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml      : true,
+    version    : 'v3.2'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 </script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+<div
+class="fb-post"
+data-href="https://www.facebook.com/20531316728/posts/10154009990506729/"
+data-width="500"></div>
+
+
+
 
 </head>
 
@@ -166,16 +173,12 @@ div.ex4 {
                   <td width="30%"><b>Phone Number</b></td>
                 </tr>
               </table>
-
               <script>
-
                 var ptID = window.location.href.split('?').pop();
                 var dbLoc = "registered/"+ ptID;
-
                 var tbp = document.getElementById('pt-table');
                 var rowIndex = 1;
                 var databaseRef = firebase.database().ref(dbLoc);
-
                   databaseRef.once('value', function(snapshot){
                   snapshot.forEach(function(childSnapshot) {
                       var childKey = childSnapshot.key;
