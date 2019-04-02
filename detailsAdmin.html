@@ -154,7 +154,7 @@ div.ex4 {
           <h5 class="w3-text-black" id="tarikhP">Date</h5>
           <h5 class="w3-text-black" id="masaP">Time</h5>
           <h5 class="w3-text-black" id="hargaP">Price</h5>
-          <h5 class="w3-text-black" id="hargaP">Description</h5>
+          <h5 class="w3-text-black" id="descP">Description</h5>
 
           <button id="shareBtn" onclick="shareOverrideOGMeta()" class="button button2">Share</button><br>
 
@@ -225,12 +225,14 @@ div.ex4 {
               pDate = "Date : " + childData.date;
               pTime = "Time : " + childData.time;
               pPrice = "Price : " + childData.price;
+              pDesc = "Description : " + childData.details;
 
               document.getElementById("poster").src = pURL;
               document.getElementById("tajukP").innerHTML= pName;
               document.getElementById("tarikhP").innerHTML= pDate;
               document.getElementById("masaP").innerHTML= pTime;
               document.getElementById("hargaP").innerHTML= pPrice;
+              document.getElementById("descP").innerHTML= pPrice;
 
             }
           });
