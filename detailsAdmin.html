@@ -242,7 +242,9 @@ div.ex4 {
 
         function shareOverrideOGMeta(){
         	FB.ui({
-        		method: 'share_open_graph',
+            method: 'share',
+            display: 'popup',
+        		//method: 'share_open_graph',
         		action_type: 'og.likes',
         		action_properties: JSON.stringify({
         			object: {
